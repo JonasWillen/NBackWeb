@@ -9,9 +9,9 @@ Milestones are ordered; each ends with a manually smoke-tested, committed increm
 - Verify: page loads at `https://<user>.github.io/NBackWeb/`
 
 ## M1 — Model: game engine (MVVM Model)
-- [ ] `js/model/StimulusGenerator.js` — random position (grid index) + letter per event; guarantees ~25–30% match rate per stream.
-- [ ] `js/model/Round.js` — round state: settings (n, event count, interval, grid size, letter set), event index, hit/miss/false-alarm tracking per modality.
-- [ ] `js/model/Score.js` — score computation (hits vs false alarms) and serialization.
+- [x] `js/model/StimulusGenerator.js` — random position (grid index) + letter per event; guarantees ~25–30% match rate per stream.
+- [x] `js/model/Round.js` — round state: settings (n, event count, interval, grid size, letter set), event index, hit/miss/false-alarm tracking per modality.
+- [x] `js/model/Score.js` — score computation (hits vs false alarms) and serialization.
 
 ## M2 — ViewModel
 - [ ] `js/viewmodel/SettingsViewModel.js` — load/save settings to `localStorage`.
