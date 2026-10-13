@@ -20,11 +20,11 @@ Milestones are ordered; each ends with a manually smoke-tested, committed increm
 - [x] `js/model/Storage.js` — thin persistence adapter around `localStorage`.
 
 ## M3 — Views
-- [ ] `index.html` home screen: high score display, mode selection (visual / auditory / dual), current settings summary.
-- [ ] `js/view/GridView.js` — 3×3 (configurable) grid, highlight cell, landscape/portrait safe.
-- [ ] `js/view/AudioView.js` (adapter) — speak letters via `speechSynthesis`, fallback tones via WebAudio.
-- [ ] `js/view/GameScreen.js` — round progress (event x/y, correct count), match buttons (visual / audio), gentle error animation (CSS transform/color).
-- [ ] `js/view/SettingsScreen.js` and `js/view/ScoresScreen.js` — extras for higher grade.
+- [x] `index.html` home screen: high score display, mode selection (visual / auditory / dual), current settings summary.
+- [x] `js/view/GridView.js` — 3×3 (configurable) grid, highlight cell, landscape/portrait safe.
+- [x] `js/view/AudioView.js` (adapter) — speak letters via `speechSynthesis`, fallback tones via WebAudio.
+- [x] `js/view/GameScreen.js` — round progress (event x/y, correct count), match buttons (visual / audio), gentle error animation (CSS transform/color).
+- [x] `js/view/SettingsScreen.js`, `js/view/ScoresScreen.js`, `js/view/SummaryScreen.js`, `js/app.js` (navigator/composition root) — extras for higher grade.
 
 ## M4 — Polish & higher-grade extras
 - [ ] Settings persistence (M2 done), score list with sorting (M3 done), tablet/landscape QA pass.
