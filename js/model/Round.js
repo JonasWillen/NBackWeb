@@ -32,10 +32,6 @@ export class Round {
       : null;
   }
 
-  get isFinished() {
-    return this.eventIndex >= this.events.length - 1 && this.responded();
-  }
-
   tracks(stream) {
     return this.modality === 'dual' || this.modality === stream;
   }
