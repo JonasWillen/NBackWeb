@@ -2,35 +2,40 @@
 
 Milestones are ordered; each ends with a manually smoke-tested, committed increment on a branch.
 
-## M0 — Skeleton & deploy pipeline
+## M0 — Skeleton & deploy pipeline ✅
 - [x] `AGENTS.md`, `docs/spec.md`, `docs/plan.md`
-- [x] `index.html` "Hello World" landing page (responsive, viewport meta)
-- [x] Enable GitHub Pages (Settings → Pages → Deploy from branch `main`, root `/`)
-- Verify: page loads at `https://<user>.github.io/NBackWeb/`
+- [x] `index.html` landing page (responsive, viewport meta)
+- [x] GitHub Pages enabled (Deploy from branch `main`, root `/`)
+- Verified live at https://jonaswillen.github.io/NBackWeb/
 
-## M1 — Model: game engine (MVVM Model)
-- [x] `js/model/StimulusGenerator.js` — random position (grid index) + letter per event; guarantees ~25–30% match rate per stream.
-- [x] `js/model/Round.js` — round state: settings (n, event count, interval, grid size, letter set), event index, hit/miss/false-alarm tracking per modality.
-- [x] `js/model/Score.js` — score computation (hits vs false alarms) and serialization.
+## M1 — Model: game engine (MVVM Model) ✅
+- [x] `js/model/StimulusGenerator.js` — random position + letter per event; ~28% match rate per stream; match events validated against n-back.
+- [x] `js/model/Round.js` — round state: settings, event index, hit/miss/false-alarm/correct-rejection per modality; judges match inputs.
+- [x] `js/model/Score.js` — score computation (hit rate minus false-alarm penalty), serialization, sorting by name/score/date.
 
-## M2 — ViewModel
-- [x] `js/viewmodel/SettingsViewModel.js` — load/save settings to `localStorage`.
-- [x] `js/viewmodel/GameViewModel.js` — owns the round timer, exposes observable state (current event, score) to the View; handles match input and judges it against the model.
-- [x] `js/viewmodel/HighScoreViewModel.js` — add score entries; sort by name/score/date.
+## M2 — ViewModel ✅
 - [x] `js/model/Storage.js` — thin persistence adapter around `localStorage`.
+- [x] `js/viewmodel/SettingsViewModel.js` — validated, clamped, persistent settings with change listeners.
+- [x] `js/viewmodel/GameViewModel.js` — round lifecycle (start/tick/respond/stop), observable state snapshots, double-input guard.
+- [x] `js/viewmodel/HighScoreViewModel.js` — persistent entries (capped at 100), sort by name/score/date, `best()`.
 
-## M3 — Views
-- [x] `index.html` home screen: high score display, mode selection (visual / auditory / dual), current settings summary.
-- [x] `js/view/GridView.js` — 3×3 (configurable) grid, highlight cell, landscape/portrait safe.
-- [x] `js/view/AudioView.js` (adapter) — speak letters via `speechSynthesis`, fallback tones via WebAudio.
-- [x] `js/view/GameScreen.js` — round progress (event x/y, correct count), match buttons (visual / audio), gentle error animation (CSS transform/color).
-- [x] `js/view/SettingsScreen.js`, `js/view/ScoresScreen.js`, `js/view/SummaryScreen.js`, `js/app.js` (navigator/composition root) — extras for higher grade.
+## M3 — Views ✅
+- [x] `index.html` home screen: high score display, mode selection (visual / audio / dual), settings summary.
+- [x] `js/view/GridView.js` — configurable grid (3×3 default, 2–6), highlight + blink on repeated position, landscape/portrait safe.
+- [x] `js/view/AudioView.js` — speaks lowercase letters via `speechSynthesis` (avoids "capital K" announcements), WebAudio tone fallback.
+- [x] `js/view/GameScreen.js` — status bar (event x/y, correct count), match buttons, gentle shake/pop feedback.
+- [x] `js/view/SettingsScreen.js`, `js/view/ScoresScreen.js`, `js/view/SummaryScreen.js`, `js/app.js` (navigator/composition root).
 
-## M4 — Polish & higher-grade extras
-- [ ] Settings persistence (M2 done), score list with sorting (M3 done), tablet/landscape QA pass.
-- [ ] Preventing double input per event; end-of-round summary screen.
-- [ ] Final responsive QA: 320 px phone portrait/landscape, tablet, desktop.
+## M4 — Polish & higher-grade extras ✅
+- [x] Settings persistence (M2), score list with sorting (M3).
+- [x] Double input prevented per event (GameViewModel guard); end-of-round summary screen with modality-aware stats.
+- [x] Responsive layout: fluid grid (`min(88vw, 60dvh)`), landscape side-by-side layout, safe-area padding, ≥44px touch targets.
 
-## Risks
-- Mobile autoplay restrictions → all audio starts only after a user gesture (the Start button).
-- `speechSynthesis` voice availability varies on Android → letter set pronounced via individual letters; fallback tones.
+## M5 — QA & documentation ✅
+- [x] Manual QA checklist: `docs/testing.md` (phone/tablet/desktop, portrait/landscape, all modality flows).
+- [x] README, AGENTS.md, spec.md reviewed and updated to final state.
+- [x] Syntax check all modules (`node --check`), DOM id cross-check between views and `index.html`.
+
+## Risks (all mitigated)
+- Mobile autoplay restrictions → audio starts only after the Start-button gesture.
+- `speechSynthesis` voice availability on Android → lowercase letters for clean pronunciation; WebAudio tone fallback.
