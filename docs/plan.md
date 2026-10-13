@@ -14,9 +14,10 @@ Milestones are ordered; each ends with a manually smoke-tested, committed increm
 - [x] `js/model/Score.js` — score computation (hits vs false alarms) and serialization.
 
 ## M2 — ViewModel
-- [ ] `js/viewmodel/SettingsViewModel.js` — load/save settings to `localStorage`.
-- [ ] `js/viewmodel/GameViewModel.js` — owns the round timer, exposes observable state (current event, score) to the View; handles match input and judges it against the model.
-- [ ] `js/viewmodel/HighScoreViewModel.js` — add score entries; sort by name/score/date.
+- [x] `js/viewmodel/SettingsViewModel.js` — load/save settings to `localStorage`.
+- [x] `js/viewmodel/GameViewModel.js` — owns the round timer, exposes observable state (current event, score) to the View; handles match input and judges it against the model.
+- [x] `js/viewmodel/HighScoreViewModel.js` — add score entries; sort by name/score/date.
+- [x] `js/model/Storage.js` — thin persistence adapter around `localStorage`.
 
 ## M3 — Views
 - [ ] `index.html` home screen: high score display, mode selection (visual / auditory / dual), current settings summary.
