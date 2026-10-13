@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="UX Lab — 20 alternative UX concepts for the N-back game" />
+  <title>UX Lab — NBackWeb</title>
+  <style>
+    :root {
+      --bg: #0f172a; --surface: #1e293b; --surface-2: #334155;
+      --fg: #e2e8f0; --muted: #94a3b8; --accent: #38bdf8; --good: #34d399; --bad: #f472b6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--bg); color: var(--fg);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      padding: 1rem; padding-bottom: 4rem;
+    }
+    header { text-align: center; margin-bottom: 1.5rem; }
+    header h1 { font-size: clamp(1.4rem, 6vw, 2.2rem); margin: 0 0 0.25rem; }
+    header p { color: var(--muted); margin: 0; font-size: 0.9rem; }
+    .back-link { color: var(--accent); text-decoration: none; display: inline-block; margin-bottom: 1rem; font-size: 0.9rem; }
+    h2.section { font-size: 1.1rem; color: var(--accent); border-bottom: 1px solid var(--surface-2); padding-bottom: 0.35rem; margin: 2rem 0 0.75rem; }
+
+    .ux-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(320px, 92vw), 1fr)); gap: 1rem; }
+    .ux-card {
+      background: var(--surface); border-radius: 16px; padding: 1rem;
+      display: flex; flex-direction: column; gap: 0.6rem;
+    }
+    .ux-card h3 { margin: 0; font-size: 0.95rem; }
+    .ux-card .tag { font-size: 0.68rem; background: var(--surface-2); border-radius: 999px; padding: 0.12rem 0.55rem; color: var(--muted); }
+    .ux-card p { margin: 0; font-size: 0.78rem; color: var(--muted); line-height: 1.35; }
+    .demo {
+      background: var(--bg); border-radius: 12px; min-height: 150px;
+      display: flex; align-items: center; justify-content: center;
+      padding: 0.75rem; position: relative; overflow: hidden;
+    }
+    .demo-btn {
+      border: none; border-radius: 10px; background: var(--accent); color: #0f172a;
+      font-weight: 700; padding: 0.55rem 1rem; cursor: pointer; min-height: 44px; font-size: 0.85rem;
+    }
+    .demo-btn:active { transform: scale(0.96); }
+
+    /* demo visuals */
+    .demo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; width: 100px; height: 100px; }
+    .demo-grid div { background: var(--surface-2); border-radius: 6px; }
+    .demo-grid div.on { background: var(--accent); }
+
+    .ring { width: 110px; height: 110px; position: relative; }
+    .ring div { position: absolute; inset: 0; border: 3px solid var(--surface-2); border-radius: 50%; }
+    .ring div.on { border-color: var(--accent); box-shadow: 0 0 12px var(--accent); }
+
+    .slider-track { width: 100%; height: 6px; background: var(--surface-2); border-radius: 3px; position: relative; margin-top: 1.4rem; }
+    .slider-thumb { position: absolute; top: -6px; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); transition: left 0.25s ease; }
+
+    .btn { border: none; border-radius: 12px; background: var(--surface-2); color: var(--fg); padding: 0.7rem 1rem; cursor: pointer; min-height: 44px; font-size: 0.85rem; }
+    .btn.on { background: var(--accent); color: #0f172a; font-weight: 700; }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; }
+    .chip { background: var(--surface-2); border-radius: 999px; padding: 0.4rem 0.85rem; font-size: 0.78rem; }
+    .chip.hot { background: var(--accent); color: #0f172a; font-weight: 700; }
+
+    .bottom-sheet { position: absolute; left: 0; right: 0; bottom: -120px; height: 120px; background: var(--surface-2); border-radius: 16px 16px 0 0; transition: bottom 0.35s ease; padding: 0.75rem; }
+    .sheet-open .bottom-sheet { bottom: 0; }
+    .handle { width: 40px; height: 4px; background: var(--muted); border-radius: 2px; margin: 0 auto 0.5rem; }
+
+    .dots { display: flex; gap: 6px; }
+    .dots span { width: 9px; height: 9px; border-radius: 50%; background: var(--surface-2); }
+    .dots span.on { background: var(--accent); }
+
+    .bar-fill { width: 100%; height: 10px; background: var(--surface-2); border-radius: 5px; overflow: hidden; }
+    .bar-fill > div { height: 100%; background: var(--accent); width: 0; transition: width 0.25s ease; }
+
+    .spin-btn { width: 96px; height: 96px; border-radius: 50%; border: 6px solid var(--surface-2); border-top-color: var(--accent); animation: spin 1.2s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .keyboard { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; width: 150px; }
+    .keyboard div { height: 34px; background: var(--surface-2); border-radius: 6px; display: grid; place-items: center; font-size: 0.7rem; color: var(--muted); }
+    .keyboard div.on { background: var(--accent); color: #0f172a; font-weight: 700; }
+
+    .timeline { width: 100%; display: flex; gap: 3px; }
+    .timeline span { flex: 1; height: 24px; background: var(--surface-2); border-radius: 4px; }
+    .timeline span.on { background: var(--accent); }
+    .timeline span.past { opacity: 0.4; }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="back-link" href="index.html">← Back to the game</a>
+    <h1>🧪 UX Lab</h1>
+    <p>20 alternative UX approaches for the N-back game &amp; menus — tap a demo to play its mock sequence.</p>
+  </header>
+
+  <h2 class="section">Game visualizations — 12 concepts</h2>
+  <div class="ux-grid" id="game-concepts"></div>
+
+  <h2 class="section">Menus &amp; navigation — 8 concepts</h2>
+  <div class="ux-grid" id="menu-concepts"></div>
+
+  <script type="module" src="js/ux-lab/render.js"></script>
+</body>
+</html>
