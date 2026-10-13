@@ -25,14 +25,19 @@ export class SummaryScreen {
   show(payload) {
     this.score = payload?.score ?? null;
     const stats = payload?.stats;
+    const modality = this.score?.modality;
     const rows = [
       ['Score', this.score ? String(this.score.value) : '—'],
-      ['Mode', this.score?.modality ?? '—'],
+      ['Mode', modality ?? '—'],
       ['n-back level', String(this.score?.n ?? '—')],
     ];
     if (stats) {
-      rows.push(['Visual hits', `${stats.position.hits}/${stats.position.hits + stats.position.misses}`]);
-      rows.push(['Audio hits', `${stats.letter.hits}/${stats.letter.hits + stats.letter.misses}`]);
+      if (modality !== 'audio') {
+        rows.push(['Visual hits', `${stats.position.hits}/${stats.position.hits + stats.position.misses}`]);
+      }
+      if (modality !== 'visual') {
+        rows.push(['Audio hits', `${stats.letter.hits}/${stats.letter.hits + stats.letter.misses}`]);
+      }
       rows.push(['False alarms', String(stats.position.falseAlarms + stats.letter.falseAlarms)]);
     }
     this.root.querySelector('#summary-rows').innerHTML = rows
