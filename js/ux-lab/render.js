@@ -1,7 +1,9 @@
 /**
- * UX Lab renderer — builds 20 concept cards with tiny self-contained demos.
- * Each demo runs a canned mock stimulus sequence so the interaction can be felt, not just seen.
+ * UX Lab renderer — builds 20 concept cards with tiny self-contained demos,
+ * plus the live color theme gallery.
  */
+
+import { buildThemeGallery } from './gallery.js';
 
 const SEQ = [4, 1, 4, 7, 0, 4, 2, 8, 2, 5];
 
@@ -373,6 +375,7 @@ const menuConcepts = [
 ];
 
 function render() {
+  buildThemeGallery(document.getElementById('theme-concepts'));
   const gameRoot = document.getElementById('game-concepts');
   const menuRoot = document.getElementById('menu-concepts');
   gameConcepts.forEach((c) => c.build(card(gameRoot, c)));
