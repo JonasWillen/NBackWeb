@@ -14,7 +14,7 @@ export class AudioView {
   speak(letter) {
     if (this.speechAvailable) {
       try {
-        const utterance = new SpeechSynthesisUtterance(letter);
+        const utterance = new SpeechSynthesisUtterance(String(letter).toLowerCase());
         utterance.lang = 'en-US';
         utterance.rate = 1;
         globalThis.speechSynthesis.cancel();

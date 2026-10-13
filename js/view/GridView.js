@@ -11,6 +11,7 @@ export class GridView {
     this.container = container;
     this.gridSize = gridSize;
     this.cells = [];
+    this.lastPosition = null;
     this.render();
   }
 
@@ -29,10 +30,23 @@ export class GridView {
 
   /** @param {number|null} position cell index or null to clear */
   highlight(position) {
-    this.cells.forEach((c, i) => c.classList.toggle('lit', i === position));
+    const repeat = this.lastPosition !== null && position === this.lastPosition;
+    this.lastPosition = position;
+    this.cells.forEach((c, i) => {
+      const lit = i === position;
+      c.classList.toggle('lit', lit);
+      if (lit && repeat) {
+        c.classList.remove('blink');
+        void c.offsetWidth;
+        c.classList.add('blink');
+      } else {
+        c.classList.remove('blink');
+      }
+    });
   }
 
   clear() {
+    this.lastPosition = null;
     this.highlight(null);
   }
 }
