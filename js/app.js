@@ -8,6 +8,7 @@ import { GameScreen } from './view/GameScreen.js';
 import { SettingsScreen } from './view/SettingsScreen.js';
 import { ScoresScreen } from './view/ScoresScreen.js';
 import { SummaryScreen } from './view/SummaryScreen.js';
+import { initPWA } from './pwa.js';
 
 class App {
   constructor() {
@@ -37,6 +38,7 @@ class App {
     };
     Object.values(this.screens).forEach((s) => (s.root.classList.contains('screen') ? null : s.root.classList.add('screen')));
     this.navigate('home-screen');
+    initPWA();
   }
 }
 

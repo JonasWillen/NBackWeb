@@ -6,6 +6,13 @@
   <meta name="description" content="Dual N-back working-memory game" />
   <meta name="theme-color" content="#1e293b" />
   <title>NBackWeb — Dual N-back</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="N-back" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -14,7 +21,7 @@
   <section id="home-screen" class="screen">
     <h1>N-back</h1>
     <div>
-      <div class="muted">Best score</div>
+      <div class="muted">🏆 Best score</div>
       <div class="big-score" id="home-best">0</div>
     </div>
     <div class="mode-picker">
@@ -26,6 +33,7 @@
     <div class="mode-picker">
       <button class="btn subtle" id="home-settings">⚙️ Settings</button>
       <button class="btn subtle" id="home-scores">🏆 High scores</button>
+      <button class="btn subtle" id="home-install" style="display:none">📲 Install app</button>
     </div>
     <a href="ux-lab.html" style="color:#94a3b8;font-size:0.85rem">🧪 UX Lab — alternative design concepts</a>
   </section>

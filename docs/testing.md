@@ -37,6 +37,8 @@ Then repeat key checks on https://jonaswillen.github.io/NBackWeb/ after each rel
 ## Scores
 - [ ] Entries sortable by Score, Name, and Date.
 - [ ] Empty state shows a friendly message.
+- [ ] Top 3 entries by score show 🥇🥈🥉, the rest show their rank number — also when sorted by Name or Date.
+- [ ] Home screen shows 🏆 next to the best score.
 
 ## Responsive / devices
 - [ ] Phone portrait (~375 px) and landscape (~667×375): grid and buttons fit without scrolling; landscape uses side-by-side layout.
@@ -44,6 +46,13 @@ Then repeat key checks on https://jonaswillen.github.io/NBackWeb/ after each rel
 - [ ] Touch targets ≥ 44 px; no hover-only interactions.
 - [ ] Notched phones: content respects safe areas.
 
+## PWA / offline
+- [ ] `manifest.webmanifest` loads (DevTools → Application → Manifest) with 192/512/maskable icons and standalone display.
+- [ ] Service worker registers on http://localhost:8000 and on the GitHub Pages URL (not on `file://`).
+- [ ] After first load, enable offline (DevTools → Network) and reload: the game still boots and a round is playable.
+- [ ] Where supported, the 📲 Install app button appears on the home screen and triggers the browser install prompt; after install the app opens standalone with the grid icon.
+- [ ] Every path in the `sw.js` `ASSETS` list returns 200 when served locally.
+
 ## Regression checks
-- [ ] `node --check` passes on every `js/**/*.js`.
+- [ ] `node --check` passes on every `js/**/*.js` plus `sw.js`.
 - [ ] DOM id cross-check: every id referenced in `js/view/**` and `js/app.js` exists in `index.html`.
