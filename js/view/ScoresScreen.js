@@ -31,18 +31,23 @@ export class ScoresScreen {
 
   render() {
     const entries = this.scoresVM.sortedBy(this.sortKey);
+    const rankByScore = new Map(this.scoresVM.sortedBy('score').map((e, i) => [e, i]));
+    const medals = ['🥇', '🥈', '🥉'];
     this.listEl.innerHTML =
       entries.length === 0
         ? '<li class="muted">No scores yet — play a round!</li>'
         : entries
-            .map(
-              (e) => `<li>
-                <span>${escapeHtml(e.playerName ?? 'Anonymous')}
+            .map((e) => {
+              const rank = rankByScore.get(e) ?? 0;
+              const badge = medals[rank] ?? `#${rank + 1}`;
+              return `<li>
+                <span class="rank-badge">${badge}</span>
+                <span class="score-main">${escapeHtml(e.playerName ?? 'Anonymous')}
                   <span class="muted">· ${e.modality} · n=${e.n}</span></span>
                 <span class="muted">${new Date(e.date).toLocaleDateString()}</span>
                 <span class="score-value">${e.value}</span>
-              </li>`
-            )
+              </li>`;
+            })
             .join('');
   }
 }

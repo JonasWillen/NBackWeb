@@ -7,10 +7,13 @@ Target platform: **mobile-first web app** for smartphones, tablets, and desktop,
 ## Architecture
 - **MVVM**: Model (game engine), ViewModel (state & bindings), View (DOM). No "god" classes/files.
 - Pure static site: HTML + CSS + vanilla JavaScript (ES modules). No build step, no framework — the site runs directly or via GitHub Pages.
+- PWA: `manifest.webmanifest` + `icons/` + `sw.js` (offline cache, cache version in `CACHE` constant). All URLs relative so the GitHub Pages subpath works; `sw.js` only registers over http(s)/localhost, not `file://`. Register via `js/pwa.js` (`initPWA()`), which also wires the `#home-install` button to `beforeinstallprompt`.
 - Layout:
   - `index.html` — app shell containing all screens
+  - `manifest.webmanifest`, `sw.js`, `icons/` — PWA manifest, service worker, app icons
   - `css/styles.css` — mobile-first theme
   - `js/app.js` — composition root & screen navigator
+  - `js/pwa.js` — service worker registration & install prompt
   - `js/model/` — StimulusGenerator, Round, Score, Storage (localStorage adapter)
   - `js/viewmodel/` — SettingsViewModel, GameViewModel, HighScoreViewModel
   - `js/view/` — HomeScreen, GameScreen, GridView, AudioView, SettingsScreen, ScoresScreen, SummaryScreen
@@ -31,7 +34,8 @@ Target platform: **mobile-first web app** for smartphones, tablets, and desktop,
 - `node --check` every changed JS file.
 - Cross-check that every DOM id referenced in `js/view/**` and `js/app.js` exists in `index.html`.
 - Manual QA per `docs/testing.md` (phone/tablet/desktop, portrait/landscape, all modality flows).
-- Serve locally: `python3 -m http.server 8000` → http://localhost:8000.
+- Serve locally: `python3 -m http.server 8000` → http://localhost:8000 (required for the service worker / offline PWA; `file://` still plays but without SW).
+- `node --check` also covers `sw.js`; verify every path in the `sw.js` `ASSETS` list exists on disk.
 
 ## Git / delivery
 - Branches: `main` is default; work on `vibe/*` or feature branches; merge via PRs.
