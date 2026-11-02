@@ -2,7 +2,9 @@
 
 A responsive, mobile-first web implementation of the **Dual N-back** working-memory game. Works on smartphones, tablets, and desktops. Static site — no build step, no backend.
 
-**Play it:** https://jonaswillen.github.io/NBackWeb/
+**Play it:** https://jonaswillen.github.io/NBackWeb/ — or scan the QR code:
+
+[<img src="docs/qr-code.png" alt="QR code linking to https://jonaswillen.github.io/NBackWeb/" width="160" />](https://jonaswillen.github.io/NBackWeb/)
 
 ## What is N-back?
 You see/hear a sequence of stimuli — a cell lighting up in a grid, and/or a spoken letter. Respond when the current stimulus matches the one from *n* steps earlier. The dual variant runs two independent streams at once.
